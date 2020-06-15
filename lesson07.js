@@ -1,17 +1,12 @@
 "use strict";
 
-// lesson 6
-console.log("----------------------------------");
-console.log("lesson_06");
-console.log("----------------------------------");
-
 let money;
 
-let isNumber = function (n) {
+const isNumber = function (n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
-let start = function () {
+const start = function () {
   do {
     money = prompt("money per month: ");
   } while (!isNumber(money));
@@ -32,27 +27,23 @@ const appData = {
   budgetMonth: 0,
   expensesMonth: 0,
   asking: function () {
-    let addExpenses = prompt("possible expenses: ", "cinema, circus");
+    const addExpenses = prompt("possible expenses: ", "cinema, circus");
     appData.addExpenses = addExpenses.toLowerCase().split(", ");
     appData.deposit = confirm("do you have deposit? (yes/no) ");
 
-    let obligatoryExpenses = [];
     for (let i = 0; i < 2; i++) {
       let amount;
-      obligatoryExpenses[i] = prompt("obligatory expenses: ");
+      let obligatedExpenses = prompt("obligatory expenses: ");
       while (!isNumber(amount)) {
         amount = prompt("expenses amount: ");
       }
-      appData.expenses[obligatoryExpenses[i]] = +amount;
+      appData.expenses[obligatedExpenses] = +amount;
     }
-    console.log(appData.expenses);
   },
   getExpensesMonth: function () {
-    let sum = 0;
     for (let key in appData.expenses) {
-      sum += appData.expenses[key];
+      appData.expensesMonth += appData.expenses[key];
     }
-    appData.expensesMonth = sum;
   },
   getBudget: function () {
     appData.budgetMonth = appData.budget - appData.expensesMonth;
